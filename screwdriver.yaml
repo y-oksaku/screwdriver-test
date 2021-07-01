@@ -1,0 +1,6 @@
+jobs:
+  test:
+    image: cd.docker-registry.corp.yahoo.co.jp:4443/centos/centos7-build-base:latest
+    requires: [ ~commit, ~pr ]
+    steps:
+      - echo: echo 'Hellow World'
