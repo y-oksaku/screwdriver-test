@@ -3,4 +3,9 @@ jobs:
     image: cd.docker-registry.corp.yahoo.co.jp:4443/centos/centos7-build-base:latest
     requires: [ ~commit, ~pr ]
     steps:
-      - echo: echo 'Hellow World'
+      - echo: echo 'Hello World'
+  deploy:
+    image: cd.docker-registry.corp.yahoo.co.jp:4443/centos/centos7-build-base:latest
+    requires: []
+    steps:
+      - echo: echo 'Hello World'
