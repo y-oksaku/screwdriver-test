@@ -1,8 +1,10 @@
 shared:
-  image: node/node14:latest
+  image: node:14
 jobs:
-  notify:
+  disabled-job-1:
     requires: [ ~commit ]
     steps:
-      - |
-        echo "test"
+      - step1: echo "job-1"
+  disabled-job-2:
+    steps:
+      - step1: echo "job-2"
