@@ -1,8 +1,8 @@
 shared:
   image: node/node14:latest
 jobs:
-  notify:
-    requires: [ ~commit ]
+  test:
+    requires: [ ~pr:/^.*$/ ]
     steps:
       - |
         echo "test"
