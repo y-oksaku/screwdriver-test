@@ -2,7 +2,7 @@ shared:
   image: node:16
 jobs:
   test:
-    requires: [ ~pr, ~pr:/^.*$/ ]
+    requires: [ ~pr, ~pr:pr-test ]
     steps:
       - |
         echo "test"
