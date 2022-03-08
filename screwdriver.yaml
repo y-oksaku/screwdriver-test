@@ -1,8 +1,8 @@
 shared:
-  image: node/node14:latest
+  image: node:16
 jobs:
   test:
-    requires: [ ~pr:/^.*$/ ]
+    requires: [ ~pr, ~pr:/^.*$/ ]
     steps:
       - |
         echo "test"
