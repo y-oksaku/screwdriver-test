@@ -1,8 +1,48 @@
-shared:
-  image: node/node14:latest
 jobs:
-  notify:
-    requires: [ ~commit ]
+  detached:
+    image: node:16
     steps:
-      - |
-        echo "test"
+      - test: echo "detached"
+
+  job-1:
+    requires: [ detached ]
+    image: node:16
+    steps:
+      - test: echo "job-1"
+
+  job-2:
+    requires: [ detached ]
+    image: node:16
+    steps:
+      - test: echo "job-2"
+
+  job-3:
+    requires: [ job-2 ]
+    image: node:16
+    steps:
+      - test: echo "job-3"
+
+  job-4:
+    requires: [ job-3 ]
+    image: node:16
+    steps:
+      - test: echo "job-4"
+
+  job-5:
+    requires: [ job-4 ]
+    image: node:16
+    steps:
+      - test: echo "job-5"
+
+  job-6:
+    requires: [ job-1, job-5 ]
+    image: node:16
+    steps:
+      - test: echo "job-6"
+
+  job-7:
+    requires: [ job-6 ]
+    image: node:16
+    steps:
+      - test: echo "job-7"
+
