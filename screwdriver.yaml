@@ -1,8 +1,12 @@
 shared:
   image: node/node14:latest
 jobs:
-  notify:
-    requires: [ ~commit ]
+  main:
+    requires: [ ~commit, ~pr ]
     steps:
-      - |
-        echo "test"
+      - test: |
+          echo "test.value = $(meta get parameters.test.value)"
+  detached:
+    steps:
+      - test: |
+          echo "test = $(meta get parameters.test)"
