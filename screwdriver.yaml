@@ -1,8 +1,18 @@
 shared:
   image: node/node14:latest
 jobs:
-  notify:
+  test1:
     requires: [ ~commit ]
     steps:
-      - |
-        echo "test"
+      - echo: echo "test1"
+  test2:
+    requires: [ ~commit:main ]
+    steps:
+      - echo: echo "test2"
+  test3:
+    requires: [ ~test1, ~test2 ]
+    steps:
+      - echo: echo "test3"
+  detached:
+    steps:
+      - echo: echo "detached"
