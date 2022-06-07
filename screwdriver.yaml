@@ -2,7 +2,7 @@ shared:
   image: node:14
 jobs:
   notify:
-    requires: [ ~commit ]
+    requires: [ ~commit, ~pr ]
     steps:
       - |
         echo "test"
