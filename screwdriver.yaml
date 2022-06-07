@@ -1,6 +1,6 @@
 jobs:
   main:
-    image: node:12
+    image: node:{{TAG}}
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo "test"
