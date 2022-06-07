@@ -1,8 +1,8 @@
-shared:
-  image: node:14
 jobs:
-  notify:
+  main:
+    image: node:{{TAG}}
     requires: [ ~commit, ~pr ]
     steps:
-      - |
-        echo "test"
+      - test: echo "test"
+    environment:
+      TAG: 12
