@@ -1,7 +1,7 @@
 jobs:
   main:
     image: node:{{TAG}}
-    requires: [ ~commit ]
+    requires: [ ~commit, ~pr ]
     steps:
       - test: echo "test"
     environment:
