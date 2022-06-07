@@ -5,4 +5,4 @@ jobs:
     steps:
       - test: echo "test"
     environment:
-      TAG: $(INVALID)
+      TAG: 12
