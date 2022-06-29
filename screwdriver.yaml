@@ -3,6 +3,8 @@ jobs:
     image: node:12
     requires: [ ~commit, ~pr ]
     steps:
-      - test: echo "test"
-    environment:
-      TAG: 12
+      - step1: echo $SD_STEP_NAME
+      - step2: echo $SD_STEP_NAME
+      - step3: false
+      - teardown-step1: echo $SD_STEP_NAME
+      - teardown-step2: echo $SD_STEP_NAME
