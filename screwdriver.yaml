@@ -5,6 +5,6 @@ jobs:
     steps:
       - step1: echo $SD_STEP_NAME
       - step2: echo $SD_STEP_NAME
-      - step3: false
+      - step3: "false"
       - teardown-step1: echo $SD_STEP_NAME
       - teardown-step2: echo $SD_STEP_NAME
