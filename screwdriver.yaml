@@ -3,8 +3,8 @@ jobs:
     image: node:12
     requires: [ ~commit, ~pr ]
     steps:
-      - step1: echo $SD_STEP_NAME
-      - step2: echo $SD_STEP_NAME
+      - step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
+      - step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
       - step3: "false"
-      - teardown-step1: echo $SD_STEP_NAME
-      - teardown-step2: echo $SD_STEP_NAME
+      - teardown-step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
+      - teardown-step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
