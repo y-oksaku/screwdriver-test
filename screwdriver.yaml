@@ -1,6 +1,6 @@
 jobs:
   main:
-    image: node:{{TAG}}
+    image: node:14
     requires: [ ~commit, ~pr ]
     steps:
       - env: env
