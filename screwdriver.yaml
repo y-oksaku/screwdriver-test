@@ -1,11 +1,19 @@
+annotations:
+  screwdriver.cd/chainPR: true
+  
 jobs:
   main:
     image: node:12
     requires: [ ~commit, ~pr ]
     steps:
-      - env: env
-      - step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - step3: "false"
-      - teardown-step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - teardown-step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
+      - test: echo "main"
+  foo:
+    image: node:12
+    requires: [ ~pr ]
+    steps:
+      - test: echo "foo"
+  bar:
+    image: node:12
+    requires: [ foo ]
+    steps:
+      - test: echo "bar"
