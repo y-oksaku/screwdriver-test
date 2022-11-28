@@ -4,8 +4,3 @@ jobs:
     requires: [ ~commit, ~pr ]
     steps:
       - env: env
-      - step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - step3: "false"
-      - teardown-step1: echo "$SD_STEP_ID - $SD_STEP_NAME"
-      - teardown-step2: echo "$SD_STEP_ID - $SD_STEP_NAME"
