@@ -4,3 +4,8 @@ jobs:
     requires: [ ~commit, ~pr ]
     steps:
       - env: env
+  sub:
+    image: node:12
+    requires: [ main ]
+    steps:
+      - env: env
