@@ -8,4 +8,4 @@ jobs:
     image: node:12
     requires: [ main ]
     steps:
-      - env: env
+      - wait: sleep 100
