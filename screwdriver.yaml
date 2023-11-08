@@ -1,11 +1,51 @@
 shared:
-    image: node:14
-    steps:
-        - create-artifacts: |
-           echo -n '{"name": "sample text 1"}' > ${SD_ARTIFACTS_DIR}/sample1.txt
-           echo -n '{"name": "sample text 2"}' > ${SD_ARTIFACTS_DIR}/sample2.txt
+  image: node:18
+  steps:
+    - test: echo 'test'
+
 jobs:
-    main:
-        requires: [~pr, ~commit]
-        environment:
-             SD_ZIP_ARTIFACTS: false
+  single-join-sub:
+    requires: [ ~sd@12500:hub-single-join ]
+
+  same-time-multi-join-sub1:
+    requires: [ ~sd@12500:hub-same-time-multi-join ]
+  same-time-multi-join-sub2:
+    requires: [ ~sd@12500:hub-same-time-multi-join ]
+
+  diff-time-multi-join-sub1:
+    requires: [ ~sd@12500:hub-diff-time-multi-join ]
+  diff-time-multi-join-sub2:
+    requires: [ ~sd@12500:hub-diff-time-multi-join ]
+    steps:
+      - test: sleep 10
+
+  single-trigger-sub:
+    requires: [ ~sd@12500:hub-single-trigger ]
+
+  same-time-multi-trigger-sub1:
+    requires: [ ~sd@12500:hub-same-time-multi-trigger ]
+  same-time-multi-trigger-sub2:
+    requires: [ ~sd@12500:hub-same-time-multi-trigger ]
+
+  diff-time-multi-trigger-sub1:
+    requires: [ ~sd@12500:hub-diff-time-multi-trigger ]
+  diff-time-multi-trigger-sub2:
+    requires: [ ~sd@12500:hub-diff-time-multi-trigger ]
+    steps:
+      - test: sleep 10
+
+  same-time-mix-sub:
+    requires: [ ~sd@12500:hub-same-time-mix ]
+  same-time-mix-sub1:
+    requires: [ ~sd@12500:hub-same-time-mix ]
+  same-time-mix-sub2:
+    requires: [ ~sd@12500:hub-same-time-mix ]
+
+  diff-time-mix-sub:
+    requires: [ ~sd@12500:hub-diff-time-mix ]
+  diff-time-mix-sub1:
+    requires: [ ~sd@12500:hub-diff-time-mix ]
+  diff-time-mix-sub2:
+    requires: [ ~sd@12500:hub-diff-time-mix ]
+    steps:
+      - test: sleep 10
