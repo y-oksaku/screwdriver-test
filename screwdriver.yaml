@@ -1,11 +1,42 @@
 shared:
-    image: node:14
-    steps:
-        - create-artifacts: |
-           echo -n '{"name": "sample text 1"}' > ${SD_ARTIFACTS_DIR}/sample1.txt
-           echo -n '{"name": "sample text 2"}' > ${SD_ARTIFACTS_DIR}/sample2.txt
+  image: node:18
+  steps:
+    - test: echo 'tt'
 jobs:
-    main:
-        requires: [~pr, ~commit]
-        environment:
-             SD_ZIP_ARTIFACTS: false
+  hub:
+    requires: [ ~commit ]
+  hub-single-join:
+    requires: [ hub ]
+  hub-same-time-multi-join:
+    requires: [ hub ]
+  hub-diff-time-multi-join:
+    requires: [ hub ]
+  hub-single-trigger:
+    requires: [ hub ]
+  hub-same-time-multi-trigger:
+    requires: [ hub ]
+  hub-diff-time-multi-trigger:
+    requires: [ hub ]
+  hub-same-time-mix:
+    requires: [ hub ]
+  hub-diff-time-mix:
+    requires: [ hub ]
+
+  single-join:
+    requires: [ sd@12501:single-join-sub ]
+  plane-single-join:
+    requires: sd@12501:single-join-sub
+  same-time-multi-join:
+    requires: [ sd@12501:same-time-multi-join-sub1, sd@12501:same-time-multi-join-sub2 ]
+  diff-time-multi-join:
+    requires: [ sd@12501:diff-time-multi-join-sub1, sd@12501:diff-time-multi-join-sub2 ]
+  single-trigger:
+    requires: [ ~sd@12501:single-trigger-sub ]
+  same-time-multi-trigger:
+    requires: [ ~sd@12501:same-time-multi-trigger-sub1, ~sd@12501:same-time-multi-trigger-sub2 ]
+  diff-time-multi-trigger:
+    requires: [ ~sd@12501:diff-time-multi-trigger-sub1, ~sd@12501:diff-time-multi-trigger-sub2 ]
+  same-time-mix:
+    requires: [ ~sd@12501:same-time-mix-sub, sd@12501:same-time-mix-sub1, sd@12501:same-time-mix-sub2 ]
+  diff-time-mix:
+    requires: [ ~sd@12501:diff-time-mix-sub, sd@12501:diff-time-mix-sub1, sd@12501:diff-time-mix-sub2 ]
