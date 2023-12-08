@@ -21,9 +21,11 @@ jobs:
     requires: [ hub ]
   hub-diff-time-mix:
     requires: [ hub ]
+  foo:
+    requires: []
 
   single-join:
-    requires: [ sd@12501:single-join-sub ]
+    requires: [ sd@12501:single-join-sub, foo ]
   plane-single-join:
     requires: sd@12501:single-join-sub
   same-time-multi-join:
