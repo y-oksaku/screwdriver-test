@@ -33,7 +33,7 @@ jobs:
   diff-time-multi-join:
     requires: [ sd@12501:diff-time-multi-join-sub1, sd@12501:diff-time-multi-join-sub2 ]
   single-trigger:
-    requires: [ ~sd@12501:single-trigger-sub ]
+    requires: [ ~sd@12501:single-trigger-sub, foo ]
   same-time-multi-trigger:
     requires: [ ~sd@12501:same-time-multi-trigger-sub1, ~sd@12501:same-time-multi-trigger-sub2 ]
   diff-time-multi-trigger:
