@@ -1,7 +1,7 @@
 shared:
     image: node:14
     steps:
-        - test: echo 'foo'
+        - test: echo 'bar'
 jobs:
     abc:
         requires: [ ~commit, ~pr ]
