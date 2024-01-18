@@ -10,4 +10,4 @@ jobs:
   test2:
     requires: []
   Y2:
-    requires: [ ~sd@10:foo, test, test2 ]
+    requires: [ ~sd@10:12926, test, test2 ]
