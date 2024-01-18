@@ -3,11 +3,7 @@ shared:
     steps:
         - test: echo 'foo'
 jobs:
-  hub:
-    requires: [ ~commit, ~pr ]
-  test:
-    requires: []
-  test2:
-    requires: []
-  Y2:
-    requires: [ ~sd@10:foo, test, test2 ]
+  foo:
+    requires: [ ~sd@9550:hub ]
+  bar:
+    requires: [ sd@9550:hub ]
