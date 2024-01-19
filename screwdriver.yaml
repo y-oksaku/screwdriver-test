@@ -3,11 +3,23 @@ shared:
     steps:
         - test: echo 'foo'
 jobs:
-  hub:
-    requires: [ ~commit, ~pr ]
-  test:
-    requires: []
-  test2:
-    requires: []
-  Y2:
-    requires: [ ~sd@12926:foo, test, test2 ]
+  first:
+    requires: [ ~commit ]
+    steps:
+      - echo: echo 'no wait'
+  x-second:
+    requires: [ first ]
+    steps:
+      - echo: echo 'no wait'
+  y-second:
+    requires: [ first ]
+    steps:
+      - wait: sleep 30
+  y-third:
+    requires: [ y-second ]
+    steps:
+      - echo: echo 'no wait'
+  z:
+    requires: [ x-second, y-third ]
+    steps:
+      - echo: echo 'no wait'
