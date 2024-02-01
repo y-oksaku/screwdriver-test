@@ -1,25 +1,39 @@
 shared:
     image: node:14
-    steps:
-        - test: echo 'foo'
+parameters:
+  plain: "REPLACE_ME"
+  choose: [ "DO_NOT_SELECT", "correct" ]
+  pipeline-description:
+    value: [ "test" ]
+    description: "Pipeline description"
+  overwrite:
+    value: [ "PIPELINE_PARAMETER" ]
 jobs:
-  first:
+  pipeline-parameter:
     requires: [ ~commit ]
     steps:
-      - echo: echo 'no wait'
-  x-second:
-    requires: [ first ]
+      - test-pipeline-parameter: |
+          echo "plain = $(meta get parameters.plain.value)"
+          if [ "$(meta get parameters.plain.value)" == "REPLACE_ME" ]; then exit 1; fi;
+          echo "choose = $(meta get parameters.choose.value)"
+          if [ "$(meta get parameters.choose.value)" == "DO_NOT_SELECT" ]; then exit 1; fi;
+          echo "overwrite = $(meta get parameters.overwrite.value)"
+          if [ "$(meta get parameters.overwrite.value)" != "PIPELINE_PARAMETER" ]; then exit 1; fi;
+  job-parameter:
+    requires: [ ~commit ]
     steps:
-      - echo: echo 'no wait'
-  y-second:
-    requires: [ first ]
-    steps:
-      - wait: sleep 30
-  y-third:
-    requires: [ y-second ]
-    steps:
-      - echo: echo 'no wait'
-  z:
-    requires: [ x-second, y-third ]
-    steps:
-      - echo: echo 'no wait'
+      - test-job-parameter: |
+          echo "job-plain = $(meta get parameters.job-plain.value)"
+          if [ "$(meta get parameters.job-plain.value)" == "REPLACE_ME" ]; then exit 1; fi;
+          echo "job-choose = $(meta get parameters.job-choose.value)"
+          if [ "$(meta get parameters.job-choose.value)" == "DO_NOT_SELECT" ]; then exit 1; fi;
+          echo "overwrite = $(meta get parameters.overwrite.value)"
+          if [ "$(meta get parameters.overwrite.value)" != "JOB_PARAMETER" ]; then exit 1; fi;
+    parameters:
+      job-plain: "REPLACE_ME"
+      job-choose: [ "DO_NOT_SELECT", "correct" ]
+      job-description:
+        value: [ "test" ]
+        description: "Job description"
+      overwrite:
+        value: [ "JOB_PARAMETER" ]
