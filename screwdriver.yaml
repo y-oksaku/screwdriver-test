@@ -23,7 +23,7 @@ shared:
 
 jobs:
   hub:
-    requires: [ ~commit, ~pr ]
+    requires: [ ~pr ]
   warning:
     steps:
       - warn: meta set build.warning.install "install warning <a href="https://www.google.com">HERE!!!</a>"
