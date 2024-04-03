@@ -27,6 +27,8 @@ jobs:
   warning:
     steps:
       - warn: meta set build.warning.install "install warning <a href="https://www.google.com">HERE!!!</a>"
+    parameters:
+      test2-para: [ "DO_NOT_SELECT", "correct" ]
 
   # a:
   #   requires: [ ~hub ]
