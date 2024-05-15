@@ -20,3 +20,5 @@ jobs:
       - test: echo 'test'
   c:
     requires: [ a, b ]
+  d:
+    requires: [ ~stage:red ]
