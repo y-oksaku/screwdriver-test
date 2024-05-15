@@ -3,42 +3,20 @@ shared:
   steps:
     - test: echo 'test'
 
-# stages:
-#   red:
-#     requires: [ ~a ]
-#     description: First stage
-#     jobs: [ b ]
-#   blue:
-#     requires: [ ~stage@red ]
-#     description: Second stage
-#     jobs: [ c ]
-#   green:
-#     requires: [ ~stage@red ]
-#     description: Third stage
-#     jobs: [ d ]
-#   yellow:
-#     requires: [ ~stage@blue, ~stage@green ]
-#     description: Fourth stage
-#     jobs: [ e ]
+stages:
+  red:
+    requires: [ ~hub ]
+    description: First stage
+    jobs: [ a, b, c ]
 
 jobs:
   hub:
-    requires: [ ~pr ]
-  warning:
+    requires: [ ~commit, ~pr ]
+  a:
     steps:
-      - warn: meta set build.warning.install "install warning <a href="https://www.google.com">HERE!!!</a>"
-    parameters:
-      test2-para: [ "DO_NOT_SELECT", "correct" ]
-
-  # a:
-  #   requires: [ ~hub ]
-  # b:
-  #   description: 'empty'
-  # c:
-  #   description: 'empty'
-  # d:
-  #   description: 'empty'
-  # e:
-  #   description: 'empty'
-  # target:
-  #   requires: [ ~stage@yellow ]
+      - test: echo 'test'
+  b:
+    steps:
+      - test: echo 'test'
+  c:
+    requires: [ a, b ]
