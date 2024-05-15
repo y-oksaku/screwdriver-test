@@ -21,4 +21,4 @@ jobs:
   c:
     requires: [ a, b ]
   d:
-    requires: [ ~stage:red ]
+    requires: [ ~stage@red ]
