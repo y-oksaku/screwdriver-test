@@ -7,16 +7,17 @@ stages:
   red:
     requires: [ ~hub ]
     description: First stage
-    jobs: [ a, b ]
+    jobs: [ a ]
 
 jobs:
   hub:
     requires: [ ~commit, ~pr ]
   a:
-    description: empty
-  b:
-    description: empty
     steps:
-      - sleep 60 && exit 1
+      - test: exit 1
+  # b:
+  #   description: empty
+  #   steps:
+  #     - sleep 60 && exit 1
   target:
     requires: [ ~stage@red ]
