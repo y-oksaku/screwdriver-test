@@ -7,7 +7,7 @@ stages:
   red:
     requires: [ ~hub ]
     description: First stage
-    jobs: [ a ]
+    jobs: [ a, b, c, d ]
 
 jobs:
   hub:
@@ -15,9 +15,12 @@ jobs:
   a:
     steps:
       - test: exit 1
-  # b:
-  #   description: empty
-  #   steps:
-  #     - sleep 60 && exit 1
+  b:
+    steps:
+      - test: sleep 60
+  c:
+    requires: [ b ]
+  d:
+    requires: [ a ]
   target:
     requires: [ ~stage@red ]
