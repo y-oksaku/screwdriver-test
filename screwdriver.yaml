@@ -2,7 +2,8 @@ shared:
   image: node:20
   steps:
     - test: echo 'test'
-
+annotations:
+  screwdriver.cd/chainPR: true
 stages:
   red:
     requires: [ ~hub ]
