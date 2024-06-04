@@ -1,32 +1,26 @@
 shared:
   image: node:20
   steps:
-    - test: echo 'test'
-annotations:
-  screwdriver.cd/chainPR: true
-stages:
-  red:
-    requires: [ ~hub ]
-    description: First stage
-    jobs: [ a, b, c, d ]
-    teardown:
-      steps:
-        - test: echo 'foo'
-
+    - echo: echo hi
 jobs:
   hub:
-    requires: [ ~commit ]
+    requires: [~commit, ~pr]
   a:
-    steps:
-      - test: echo 'bar'
+    requires: []
   b:
-    steps:
-      - test: sleep 1
+    requires: [~a]
   c:
-    requires: [ b ]
-  d:
-    requires: [ a ]
+    requires: [~b]
+    steps:
+    - echo: exit 1;
   target:
-    requires: [ ~stage@red, ~aaa ]
-  aaa:
-    requires: [ ~pr ]
+    requires: [~stage@simple_fail]
+stages:
+  simple_fail:
+    requires: [~hub]
+    jobs: [a, b, c]
+    description: First stage
+    teardown:
+      image: node:lts
+      steps:
+        - init: echo 'integration teardown'
