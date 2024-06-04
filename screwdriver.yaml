@@ -18,10 +18,10 @@ jobs:
     requires: [ ~commit ]
   a:
     steps:
-      - test: exit 1
+      - test: echo 'bar'
   b:
     steps:
-      - test: sleep 60
+      - test: sleep 1
   c:
     requires: [ b ]
   d:
