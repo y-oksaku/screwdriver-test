@@ -9,6 +9,9 @@ stages:
     requires: [ ~hub ]
     description: First stage
     jobs: [ a, b, c, d ]
+    teardown:
+      steps:
+        - test: echo 'foo'
 
 jobs:
   hub:
