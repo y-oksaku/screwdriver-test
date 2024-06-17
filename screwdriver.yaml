@@ -3,24 +3,9 @@ shared:
   steps:
     - echo: echo hi
 jobs:
-  hub:
-    requires: [~commit, ~pr]
-  a:
-    requires: []
-  b:
-    requires: [~a]
-  c:
-    requires: [~b]
-    steps:
-    - echo: exit 1;
-  target:
-    requires: [~stage@simple_fail]
-stages:
-  simple_fail:
-    requires: [~hub]
-    jobs: [a, b, c]
-    description: First stage
-    teardown:
-      image: node:lts
-      steps:
-        - init: echo 'integration teardown'
+  main:
+    requires: [ ~commit, ~pr ]
+  test:
+    requires: [ ~tag, ~release ]
+    environment:
+      GIT_SHALLOW_CLONE_SINGLE_BRANCH: true
