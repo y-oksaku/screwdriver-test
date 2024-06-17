@@ -1,7 +1,7 @@
 shared:
   image: node:20
   steps:
-    - echo: echo hi
+    - echo: ls -la
 jobs:
   main:
     requires: [ ~commit, ~pr ]
