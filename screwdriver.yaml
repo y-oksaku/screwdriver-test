@@ -1,7 +1,9 @@
 shared:
   image: node:20
   steps:
-    - echo: git log
+    - echo: |
+        git log
+        git log 'HEAD^'
 jobs:
   main:
     requires: [ ~commit, ~pr ]
