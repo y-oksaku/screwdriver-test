@@ -7,7 +7,5 @@ shared:
 jobs:
   main:
     requires: [ ~commit, ~pr ]
-  test:
-    requires: [ ~tag, ~release ]
-    environment:
-      GIT_SHALLOW_CLONE_SINGLE_BRANCH: true
+  # test:
+  #   requires: [ ~commit ]
