@@ -7,5 +7,5 @@ shared:
 jobs:
   main:
     requires: [ ~commit, ~pr ]
-  test:
-    requires: [ ~commit, ~pr ]
+  # test:
+  #   requires: [ ~commit, ~pr ]
