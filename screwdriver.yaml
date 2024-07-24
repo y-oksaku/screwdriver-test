@@ -11,7 +11,7 @@ jobs:
     requires: [ ~commit, ~pr ]
     steps: 
       - foo: git log
-  second: 
-    requires: [ ~test ]
-    steps: 
-      - foo: echo 'hoge'
+  # second: 
+  #   requires: [ ~test ]
+  #   steps: 
+  #     - foo: echo 'hoge'
