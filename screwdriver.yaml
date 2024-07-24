@@ -4,8 +4,14 @@ shared:
     - echo: |
         git log
         git log 'HEAD^'
-jobs:
-  main:
+annotations:
+  screwdriver.cd/chainPR: true
+jobs: 
+  test: 
     requires: [ ~commit, ~pr ]
-  test:
-    requires: [ ~commit, ~pr ]
+    steps: 
+      - foo: git log
+  second: 
+    requires: [ ~test ]
+    steps: 
+      - foo: echo 'hoge'
