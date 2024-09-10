@@ -1,22 +1,8 @@
-parameters:
-  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ: ["QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ", "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"]
-  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR: ["QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ", "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"]
-  test: ["go"]
-
-shared:
-  image: node:20
-  steps:
-    - echo: |
-        git log
-        git log 'HEAD^'
-annotations:
-  screwdriver.cd/chainPR: true
-jobs: 
-  test: 
+jobs:
+  test:
+    image: node:18
     requires: [ ~commit, ~pr ]
-    steps: 
-      - foo: git log
-  # second: 
-  #   requires: [ ~test ]
-  #   steps: 
-  #     - foo: echo 'hoge'
+    steps:
+      - test: echo "foo"
+    annotations:
+      screwdriver.cd/displayName: "very-long-long-long-long-name"
