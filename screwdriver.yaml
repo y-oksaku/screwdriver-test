@@ -1,7 +1,14 @@
 jobs:
   test:
     image: node:18
-    requires: [ ~commit, ~pr ]
+    requires: [ ~commit, ~pr, ~sd@12500:hub ]
+    steps:
+      - test: echo "foo"
+    annotations:
+      screwdriver.cd/displayName: "very-long-long-long-long-name"
+  test:
+    image: node:18
+    requires: [ ~commit, ~pr, ~sd@12500:nothing ]
     steps:
       - test: echo "foo"
     annotations:
