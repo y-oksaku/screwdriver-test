@@ -1,7 +1,7 @@
 jobs:
   test:
     image: node:18
-    requires: [ ~commit, ~pr, ~sd@12500:hub ]
+    requires: [ ~commit, ~pr, ~sd@12500:hub, ~sd@4410:fail_A ]
     steps:
       - test: echo "foo"
     annotations:
