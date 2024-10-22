@@ -3,7 +3,7 @@ jobs:
     image: node:18
     requires: [ ~commit, ~pr, ~sd@12500:hub, ~sd@4410:fail_A ]
     steps:
-      - test: echo "foo1"
+      - test: echo "foo2"
     annotations:
       screwdriver.cd/displayName: "very-long-long-long-long-name"
   test2:
