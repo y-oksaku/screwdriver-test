@@ -1,15 +1,31 @@
+shared:
+  image: node:18
 jobs:
-  test:
-    image: node:18
-    requires: [ ~commit, ~pr, ~sd@12500:hub, ~sd@4410:fail_A ]
+  main:
+    requires: [ ~commit, ~pr ]
     steps:
-      - test: echo "foo4"
+      - set: meta set hello "Hello Meta!"
+      - test: meta dump | jq -M
+  virtual:
+    requires: [ main ]
     annotations:
-      screwdriver.cd/displayName: "very-long-long-long-long-name"
-  test2:
-    image: node:18
-    requires: [ ~commit, ~pr, ~sd@12500:nothing ]
+      screwdriver.cd/virtualJob: true
     steps:
-      - test: echo "foo"
-    annotations:
-      screwdriver.cd/displayName: "very-long-long-long-long-name"
+      - test: meta dump | jq -M
+  third:
+    requires: [ virtual ]
+    steps:
+      - test: meta dump | jq -M
+  foo:
+    requires: [ ~commit, ~pr ]
+    steps:
+      - set: meta set hello "Hello Meta!"
+      - test: meta dump | jq -M
+  bar:
+    requires: [ foo ]
+    steps:
+      - test: meta dump | jq -M
+  baz:
+    requires: [ bar ]
+    steps:
+      - test: meta dump | jq -M
