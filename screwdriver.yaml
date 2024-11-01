@@ -4,7 +4,7 @@ jobs:
   main:
     requires: [ ~commit, ~pr ]
     steps:
-      - set: meta set hello "Hello Meta!"
+      - set: meta set hello "$(date)"
       - test: meta dump | jq -M
   virtual:
     requires: [ main ]
@@ -19,7 +19,7 @@ jobs:
   foo:
     requires: [ ~commit, ~pr ]
     steps:
-      - set: meta set hello "Hello Meta!"
+      - set: meta set date "$(date)"
       - test: meta dump | jq -M
   bar:
     requires: [ foo ]
