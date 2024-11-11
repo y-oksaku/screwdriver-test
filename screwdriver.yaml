@@ -1,31 +1,21 @@
 shared:
   image: node:18
 jobs:
-  main:
+  default:
     requires: [ ~commit, ~pr ]
     steps:
-      - set: meta set hello "$(date)"
-      - test: meta dump | jq -M
-  virtual:
-    requires: [ main ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: meta dump | jq -M
-  third:
-    requires: [ virtual ]
-    steps:
-      - test: meta dump | jq -M
-  foo:
+      - test: ls sd-pipeline-template-test
+  true:
     requires: [ ~commit, ~pr ]
     steps:
-      - set: meta set date "$(date)"
-      - test: meta dump | jq -M
-  bar:
-    requires: [ foo ]
+      - test: ls sd-pipeline-template-test
+    environment:
+      GIT_RECURSIVE_CLONE: true
+  false:
+    requires: [ ~commit, ~pr ]
     steps:
-      - test: meta dump | jq -M
-  baz:
-    requires: [ bar ]
-    steps:
-      - test: meta dump | jq -M
+      - test: ls sd-pipeline-template-test
+      - clone: git submodule update --init --recursive
+      - test2: ls sd-pipeline-template-test
+    environment:
+      GIT_RECURSIVE_CLONE: false
