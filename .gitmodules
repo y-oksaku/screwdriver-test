@@ -1,0 +1,3 @@
+[submodule "sd-pipeline-template-test"]
+	path = sd-pipeline-template-test
+	url = https://github.com/y-oksaku/sd-pipeline-template-test.git
