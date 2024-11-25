@@ -1,21 +1,23 @@
 shared:
   image: node:18
 jobs:
-  default:
-    requires: [ ~commit, ~pr ]
+  Job1:
+    requires: [ ~commit ]
     steps:
-      - test: ls sd-pipeline-template-test
-  true:
-    requires: [ ~commit, ~pr ]
+      - meta set x "1"
+
+  Job2:
+    requires: [ ~Job1 ]
     steps:
-      - test: ls sd-pipeline-template-test
-    environment:
-      GIT_RECURSIVE_CLONE: true
-  false:
-    requires: [ ~commit, ~pr ]
+      - meta set x "2"
+
+  Job3:
+    requires: [ ~Job1 ]
     steps:
-      - test: ls sd-pipeline-template-test
-      - clone: git submodule update --init --recursive
-      - test2: ls sd-pipeline-template-test
-    environment:
-      GIT_RECURSIVE_CLONE: false
+      - meta set x "3"
+      - sleep 30
+
+  Job4:
+    requires: [ Job2, Job3 ]
+    steps:
+      - echo $(meta get x)
