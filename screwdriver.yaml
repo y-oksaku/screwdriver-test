@@ -1,23 +1,24 @@
 shared:
   image: node:18
 jobs:
-  Job1:
-    requires: [ ~commit ]
+  main:
+    requires: [ ~commit, ~pr ]
+    annotations:
+      screwdriver.cd/virtualJob: true
     steps:
-      - meta set x "1"
-
-  Job2:
-    requires: [ ~Job1 ]
+      - test: echo 'test'
+  foo:
+    requires: [ main ]
+    annotations:
+      screwdriver.cd/virtualJob: true
     steps:
-      - meta set x "2"
-
-  Job3:
-    requires: [ ~Job1 ]
+      - test: echo 'test'
+  bar:
+    requires: [ main ]
     steps:
-      - meta set x "3"
-      - sleep 30
-
-  Job4:
-    requires: [ Job2, Job3 ]
+      - test: echo 'test'
+  baz:
+    annotations:
+      screwdriver.cd/virtualJob: true
     steps:
-      - echo $(meta get x)
+      - test: echo 'test'
