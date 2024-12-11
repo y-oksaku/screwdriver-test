@@ -1,24 +1,4 @@
-shared:
-  image: node:18
 jobs:
   main:
     requires: [ ~commit, ~pr ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: echo 'test'
-  foo:
-    requires: [ main ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: echo 'test'
-  bar:
-    requires: [ main ]
-    steps:
-      - test: echo 'test'
-  baz:
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: echo 'test'
+    template: screwdriver-cd-test/test-trusted-template@1.0.0
