@@ -1,4 +1,4 @@
 jobs:
   main:
     requires: [ ~commit, ~pr ]
-    template: screwdriver-cd-test/test-trusted-template@1.0.0
+    template: screwdriver-cd-test/test-trusted-template@1.0.194
