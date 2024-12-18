@@ -1,24 +1,11 @@
-shared:
-  image: node:18
 jobs:
   main:
     requires: [ ~commit, ~pr ]
-    annotations:
-      screwdriver.cd/virtualJob: true
+    image: node:20
     steps:
-      - test: echo 'test'
-  foo:
-    requires: [ main ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: echo 'test'
-  bar:
-    requires: [ main ]
-    steps:
-      - test: echo 'test'
-  baz:
-    annotations:
-      screwdriver.cd/virtualJob: true
-    steps:
-      - test: echo 'test'
+      - echo: echo 'test'
+    settings:
+      slack:
+        channels: [ test-default-notification ]
+        statuses: [ SUCCESS, FAILURE, QUEUED. RUNNING ]
+        message: "foo bar"
