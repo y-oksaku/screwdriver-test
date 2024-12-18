@@ -7,5 +7,5 @@ jobs:
     settings:
       slack:
         channels: [ test-default-notification ]
-        statuses: [ SUCCESS, FAILURE, QUEUED. RUNNING ]
+        statuses: [ SUCCESS, FAILURE, QUEUED, RUNNING ]
         message: "foo bar"
