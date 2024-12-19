@@ -3,7 +3,7 @@ jobs:
     requires: [ ~commit, ~pr ]
     image: node:20
     steps:
-      - echo: echo 'test'
+      - echo: meta set build.meta.notification.slack.main.message "Overwrite"
     settings:
       slack:
         channels: [ test-default-notification ]
