@@ -1,11 +1,6 @@
 jobs:
-  main:
+  long-long-long-long-longlonglonglonglonglong-long-long:
     requires: [ ~commit, ~pr ]
     image: node:20
     steps:
-      - echo: meta set notification.slack.main.message "Overwrite"
-    settings:
-      slack:
-        channels: [ test-default-notification ]
-        statuses: [ SUCCESS, FAILURE, QUEUED, RUNNING ]
-        message: "foo bar"
+      - echo: echo 'test'
