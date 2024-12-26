@@ -1,6 +1,20 @@
+shared:
+  image: node:20
+
 jobs:
-  long-long-long-long-longlonglonglonglonglong-long-long:
+  only:
     requires: [ ~commit, ~pr ]
-    image: node:20
+    steps:
+      - echo: echo 'test'
+    annotations:
+      screwdriver.cd/virtualJob: true
+  with-down:
+    requires: [ ~commit, ~pr ]
+    steps:
+      - echo: echo 'test'
+    annotations:
+      screwdriver.cd/virtualJob: true
+  down:
+    requires: [ with-down ]
     steps:
       - echo: echo 'test'
