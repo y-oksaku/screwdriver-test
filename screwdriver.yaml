@@ -18,3 +18,13 @@ jobs:
     requires: [ with-down ]
     steps:
       - echo: echo 'test'
+  main:
+    requires: [ ~commit ]
+    steps:
+      - echo: echo 'tets'
+  with-up:
+    requires: [ main ]
+    steps:
+      - echo: echo 'test'
+    annotations:
+      screwdriver.cd/virtualJob: true
