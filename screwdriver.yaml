@@ -3,7 +3,7 @@ shared:
 jobs:
     A:
         requires: [~pr, B]
-        template: nodejs/test@latest
+        # template: nodejs/test@latest
         steps:
             - runA
     B:
