@@ -1,11 +1,12 @@
+shared:
+    image: node:12
 jobs:
-  main:
-    requires: [ ~commit, ~pr ]
-    image: node:20
-    steps:
-      - echo: meta set notification.slack.main.message "Overwrite"
-    settings:
-      slack:
-        channels: [ test-default-notification ]
-        statuses: [ SUCCESS, FAILURE, QUEUED, RUNNING ]
-        message: "foo bar"
+    A:
+        requires: [~pr, B]
+        template: nodejs/test@latest
+        steps:
+            - runA
+    B:
+        requires: [~pr, ~commit]
+        steps:
+            - runB
