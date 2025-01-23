@@ -1,7 +1,7 @@
 shared:
   image: node:12
   steps:
-    - test: echo 'Foo'
+    - test: echo 'Foo bar'
 jobs:
   A:
     requires: [~pr, B, stage@foo]
