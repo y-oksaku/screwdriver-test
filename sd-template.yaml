@@ -1,0 +1,10 @@
+namespace: y-oksaku
+name: cache-test
+version: 0.0.1
+description: Test
+maintainer: yuokesak@lycorp.co.jp
+config:
+  image: node:20
+  cache: true
+  steps:
+    - test: echo test
