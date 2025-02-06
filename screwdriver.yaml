@@ -11,6 +11,6 @@ jobs:
       SD_TEMPLATE_PATH: ./sd-template.yaml
   main:
     image: node:20
-    # template: y-oksaku/cache-test@latest
+    template: y-oksaku/cache-test@latest
     steps:
       - test: echo test
