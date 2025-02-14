@@ -1,31 +1,14 @@
-shared:
-  image: node:12
-  steps:
-    - test: echo 'Foo bar'
 jobs:
-  A:
-    requires: [~pr, B, stage@foo]
-  B:
-    requires: [~pr, ~commit]
-  C:
-    requires: []
-  D:
-    requires: []
-  E:
-    requires: [ C ]
-
-stages:
-  foo:
-    jobs: [ C, E ]
-    setup:
-      steps:
-        - foo: bar
-    teardown:
-      steps:
-        - foo: bar
-  bar:
-    jobs: [ D ]
-    requires: [ B, A ]
-    setup:
-      steps:
-        - foo: bar
+  template:
+    image: node:20
+    steps:
+      - publish: |
+          npm i -g screwdriver-template-main
+          template-publish
+    environment:
+      SD_TEMPLATE_PATH: ./sd-template.yaml
+  main:
+    image: node:20
+    template: y-oksaku/cache-test@latest
+    steps:
+      - test: echo test
