@@ -4,6 +4,10 @@ shared:
         - test: echo 'foo'
 jobs:
   foo:
-    requires: [ ~sd@9550:hub ]
+    requires: [ ~sd@9550:main ]
+    annotations:
+      screwdriver.cd/virtualJob: true
   bar:
-    requires: [ sd@9550:hub ]
+    requires: [ sd@9550:main ]
+    annotations:
+      screwdriver.cd/virtualJob: true
