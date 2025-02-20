@@ -1,5 +1,13 @@
 jobs:
   main:
+    requires: [ ~commit ]
+    image: node:20
+    steps:
+      - test: echo test
+  join:
+    requires: [ sd@12926:foo, sd@12926:bar ]
+    annotations:
+      screwdriver.cd/virtualJob: true
     image: node:20
     steps:
       - test: echo test
