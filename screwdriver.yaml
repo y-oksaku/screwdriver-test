@@ -1,14 +1,5 @@
 jobs:
-  template:
-    image: node:20
-    steps:
-      - publish: |
-          npm i -g screwdriver-template-main
-          template-publish
-    environment:
-      SD_TEMPLATE_PATH: ./sd-template.yaml
   main:
     image: node:20
-    template: y-oksaku/cache-test@latest
     steps:
       - test: echo test
