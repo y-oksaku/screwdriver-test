@@ -10,4 +10,4 @@ jobs:
       screwdriver.cd/virtualJob: true
     image: node:20
     steps:
-      - test: echo test
+      - test: echo testaaa
