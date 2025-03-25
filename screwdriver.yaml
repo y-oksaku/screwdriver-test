@@ -11,47 +11,42 @@
 #     image: node:20
 #     steps:
 #       - test: echo testaaa
+
 shared:
-    image: node:22
-    steps:
-        - echo: echo "test"
+  image: node:20
+  steps:
+    - measure: |
+        meta set "clone.${SD_JOB_NAME}" 123
+        meta set "fetch.${SD_JOB_NAME}" 456
+    - dump: meta dump
 
 jobs:
-    hub:
-        requires: [ ~commit, ~pr ]
-        annotations:
-            screwdriver.cd/virtualJob: true
+  j0: &share
+    requires: [ ~commit, ~pr ]
+  j1: *share
+  j2: *share
+  j3: *share
+  j4: *share
+  j5: *share
+  j6: *share
+  j7: *share
+  j8: *share
+  j9: *share
+  j10: *share
+  j11: *share
+  j12: *share
+  j13: *share
+  j14: *share
+  j15: *share
+  j16: *share
+  j17: *share
+  j18: *share
+  j19: *share
 
-    a:
-        requires: [ ~hub ]
-        steps:
-            - set: meta set foo.bar "success"
-
-    b:
-        requires: [ ~hub ]
-        steps:
-            - set: meta set foo.baz "success"
-
-    c:
-        requires: [ ~hub ]
-        steps:
-            - set: meta set foo.bar "error"
-
-    d:
-        requires: [ ~hub ]
-        steps:
-            - set: meta set foo.baz "error"
-
-    virtual:
-        requires: [ a, b ]
-        annotations:
-            screwdriver.cd/virtualJob: true
-
-    target:
-        requires: [ ~virtual ]
-        blockedBy: [ ~c, ~d ]
-        steps:
-            - print: meta get "foo"
-            - check_meta: |
-                  test "success" = `meta get "foo.bar"`
-                  test "success" = `meta get "foo.baz"`
+  average:
+    requires: [ j0, j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19 ]
+    steps:
+      - measure: |
+          meta get "clone"
+          echo ""
+          meta get "fetch"
