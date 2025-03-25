@@ -1,0 +1,7 @@
+shared:
+  image: node:20
+jobs:
+  main:
+    requires: [ ~commit, ~pr ]
+    steps:
+      - test: echo 'test'
