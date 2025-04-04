@@ -13,7 +13,7 @@ jobs:
     steps:
       - test: |
           var=$(meta get foo.value)
-          if [ $meta != "true" ]; then
+          if [ "$var" != "true" ]; then
             exit 1
           fi
     parameters:
