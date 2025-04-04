@@ -12,7 +12,7 @@ jobs:
     requires: [ ~hub ]
     steps:
       - test: |
-          var=$(meta get foo.value)
+          var=$(meta get foo)
           if [ "$var" != "true" ]; then
             exit 1
           fi
