@@ -6,13 +6,21 @@ shared:
 jobs:
   hub:
     requires: [ ~commit, ~pr ]
-    steps:
-      - test: sleep 20
   a:
     requires: [ ~hub ]
   b:
     requires: [ ~hub ]
+    steps:
+      - test: |
+          var=$(meta get foo.value)
+          if [ $meta != "true" ]; then
+            exit 1
+          fi
+    parameters:
+      foo: "true"
   c:
     requires: [ ~hub ]
+    steps:
+      - test: sleep 120
   target:
     requires: [ a, b, c ]
