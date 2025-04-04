@@ -12,12 +12,13 @@ jobs:
     requires: [ ~hub ]
     steps:
       - test: |
-          var=$(meta get foo)
-          if [ "$var" != "true" ]; then
+          var=$(meta get parameters.foo.value)
+          echo "var = $var"
+          if [ "$var" != "abc" ]; then
             exit 1
           fi
     parameters:
-      foo: "true"
+      foo: "abc"
   c:
     requires: [ ~hub ]
     steps:
