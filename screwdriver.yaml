@@ -1,52 +1,18 @@
-# jobs:
-#   main:
-#     requires: [ ~commit ]
-#     image: node:20
-#     steps:
-#       - test: echo test
-#   join:
-#     requires: [ sd@12926:foo, sd@12926:bar ]
-#     annotations:
-#       screwdriver.cd/virtualJob: true
-#     image: node:20
-#     steps:
-#       - test: echo testaaa
-
 shared:
   image: node:20
   steps:
-    - measure: |
-        meta set "clone.${SD_JOB_NAME}" 123
-        meta set "fetch.${SD_JOB_NAME}" 456
-    - dump: meta dump
+    - test: echo 'test'
 
 jobs:
-  j0: &share
+  hub:
     requires: [ ~commit, ~pr ]
-  j1: *share
-  j2: *share
-  j3: *share
-  j4: *share
-  j5: *share
-  j6: *share
-  j7: *share
-  j8: *share
-  j9: *share
-  j10: *share
-  j11: *share
-  j12: *share
-  j13: *share
-  j14: *share
-  j15: *share
-  j16: *share
-  j17: *share
-  j18: *share
-  j19: *share
-
-  average:
-    requires: [ j0, j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15, j16, j17, j18, j19 ]
     steps:
-      - measure: |
-          meta get "clone"
-          echo ""
-          meta get "fetch"
+      - test: sleep 20
+  a:
+    requires: [ ~hub ]
+  b:
+    requires: [ ~hub ]
+  c:
+    requires: [ ~hub ]
+  target:
+    requires: [ a, b, c ]
