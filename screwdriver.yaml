@@ -1,27 +1,27 @@
 shared:
   image: node:20
   steps:
-    - test: echo 'test'
+    - hello: echo 'hello'
 
 jobs:
-  hub:
+  main:
     requires: [ ~commit, ~pr ]
-  a:
-    requires: [ ~hub ]
-  b:
-    requires: [ ~hub ]
-    steps:
-      - test: |
-          var=$(meta get parameters.foo.value)
-          echo "var = $var"
-          if [ "$var" != "abc" ]; then
-            exit 1
-          fi
-    parameters:
-      foo: "abc"
-  c:
-    requires: [ ~hub ]
-    steps:
-      - test: sleep 120
-  target:
-    requires: [ a, b, c ]
+  job1:
+    requires: []
+  job2:
+    requires: []
+  job3:
+    requires: []
+  job4:
+    requires: [ stage@foo, stage@bar, stage@baz]
+
+stages:
+  foo:
+    requires: [ ~main ]
+    jobs: [ job1 ]
+  bar:
+    requires: [ ~main ]
+    jobs: [ job2 ]
+  baz:
+    requires: [ ~main ]
+    jobs: [ job3 ]
