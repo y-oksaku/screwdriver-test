@@ -12,7 +12,7 @@ jobs:
     requires: []
   job3:
     requires: []
-  job4:
+  target-job-with-long-name:
     requires: [ stage@foo, stage@bar, stage@baz]
 
 stages:
