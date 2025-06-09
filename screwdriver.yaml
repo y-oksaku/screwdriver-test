@@ -4,24 +4,29 @@ shared:
     - hello: echo 'hello'
 
 jobs:
-  main:
-    requires: [ ~commit, ~pr ]
-  job1:
+  hub:
+    requires: [~commit, ~pr]
+    steps:
+      - wait: sleep 30
+  a:
     requires: []
-  job2:
+  b:
     requires: []
-  job3:
-    requires: []
-  target-job-with-long-name:
-    requires: [ stage@foo, stage@bar, stage@baz]
-
+    steps:
+      - fail: exit 1
+  c:
+    requires: [a]
+    steps:
+      - wait: sleep 30
+  target:
+    requires: [~stage@simple]
+    annotations:
+      screwdriver.cd/virtualJob: true
 stages:
-  foo:
-    requires: [ ~main ]
-    jobs: [ job1 ]
-  bar:
-    requires: [ ~main ]
-    jobs: [ job2 ]
-  baz:
-    requires: [ ~main ]
-    jobs: [ job3 ]
+  simple:
+    requires: [~hub]
+    jobs: [a, b, c]
+    teardown:
+      image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
+      steps:
+        - test: echo 'teardown'
