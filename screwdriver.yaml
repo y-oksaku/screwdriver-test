@@ -1,7 +1,7 @@
 shared:
   image: node:20
   steps:
-    - hello: echo 'hello'
+    - hello: echo 'world'
 
 jobs:
   hub:
@@ -23,8 +23,8 @@ jobs:
 stages:
   simple:
     requires: [~hub]
-    jobs: [a, b, c]
+    jobs: [a, b]
     teardown:
       image: node:20
       steps:
-        - test: echo 'teardown 1'
+        - test: echo 'teardown 2'
