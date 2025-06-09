@@ -1,7 +1,7 @@
 shared:
   image: node:20
   steps:
-    - hello: echo 'world'
+    - hello: echo 'hello'
 
 jobs:
   hub:
@@ -20,13 +20,11 @@ jobs:
       - wait: sleep 30
   target:
     requires: [~stage@simple]
-    annotations:
-      screwdriver.cd/virtualJob: true
 stages:
   simple:
     requires: [~hub]
-    jobs: [a, b]
+    jobs: [a, b, c]
     teardown:
-      image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
+      image: node:20
       steps:
-        - test: echo 'teardown'
+        - test: echo 'teardown 1'
