@@ -1,3 +1,6 @@
+# annotations:
+#   screwdriver.cd/chainPR: true
+
 shared:
   image: node:20
   steps:
@@ -7,7 +10,7 @@ jobs:
   hub:
     requires: [~commit, ~pr]
     steps:
-      - wait: sleep 30
+      - wait: sleep 10
   a:
     requires: []
   b:
@@ -18,13 +21,22 @@ jobs:
     requires: [a]
     steps:
       - wait: sleep 30
+  d:
+    requires: [hub]
+  e:
+    requires: [ ~stage@simple:setup ]
   target:
     requires: [~stage@simple]
+
 stages:
   simple:
-    requires: [~hub]
-    jobs: [a, b]
-    teardown:
-      image: node:20
-      steps:
-        - test: echo 'teardown 2'
+    requires: [~pr, ~commit]
+    jobs: [a, b, c]
+    # teardown:
+    #   image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
+    #   steps:
+    #     - test: echo 'teardown'
+    # setup:
+    #   image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
+    #   steps:
+    #     - test: sleep 20
