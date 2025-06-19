@@ -1,42 +1,29 @@
-# annotations:
-#   screwdriver.cd/chainPR: true
-
 shared:
   image: node:20
   steps:
     - hello: echo 'world'
+  annotations:
+    screwdriver.cd/virtualJob: true
 
 jobs:
-  hub:
-    requires: [~commit, ~pr]
-    steps:
-      - wait: sleep 10
+  main:
+    requires: [ ~pr ]
   a:
     requires: []
   b:
     requires: []
-    steps:
-      - fail: exit 1
   c:
     requires: [a]
     steps:
       - wait: sleep 30
   d:
-    requires: [hub]
+    requires: [ main ]
   e:
-    requires: [ ~stage@simple:setup ]
-  target:
-    requires: [~stage@simple]
+    requires: [ stage@simple:setup ]
+  f:
+    requires: [ stage@simple ]
 
 stages:
   simple:
-    requires: [~pr, ~commit]
+    requires: [ ~pr ]
     jobs: [a, b, c]
-    # teardown:
-    #   image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
-    #   steps:
-    #     - test: echo 'teardown'
-    # setup:
-    #   image: cd.docker-registry.corp.yahoo.co.jp:4443/rocky/rocky9-build-base:latest
-    #   steps:
-    #     - test: sleep 20
