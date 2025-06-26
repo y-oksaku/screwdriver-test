@@ -2,8 +2,6 @@ shared:
   image: node:20
   steps:
     - hello: echo 'world'
-  annotations:
-    screwdriver.cd/virtualJob: true
 
 jobs:
   main:
@@ -14,8 +12,6 @@ jobs:
     requires: []
   c:
     requires: [a]
-    steps:
-      - wait: sleep 30
   d:
     requires: [ main ]
   e:
@@ -27,3 +23,11 @@ stages:
   simple:
     requires: [ ~pr ]
     jobs: [a, b, c]
+  setup:
+    image: node:20
+    steps:
+      - hello: echo 'test'
+  teardown:
+    image: node:20
+    steps:
+      - hello: echo 'test'
