@@ -23,11 +23,11 @@ stages:
   simple:
     requires: [ ~pr ]
     jobs: [a, b, c]
-  setup:
-    image: node:20
-    steps:
-      - hello: echo 'test'
-  teardown:
-    image: node:20
-    steps:
-      - hello: echo 'test'
+    setup:
+      image: node:20
+      steps:
+        - init: echo 'integration setup'
+    teardown:
+      image: node:20
+      steps:
+        - init: echo 'integration teardown'
