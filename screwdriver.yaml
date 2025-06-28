@@ -1,5 +1,5 @@
-annotations:
-  screwdriver.cd/chainPR: true
+# annotations:
+#   screwdriver.cd/chainPR: true
 
 shared:
   image: node:20
@@ -11,8 +11,12 @@ jobs:
     requires: [ ~pr ]
   a:
     requires: []
+    steps:
+      - wait: sleep 30
   b:
     requires: []
+    steps:
+      - fail: exit 1
   c:
     requires: [a]
   d:
@@ -24,7 +28,7 @@ jobs:
 
 stages:
   simple:
-    requires: [ ~pr ]
+    requires: [ ~pr, ~commit ]
     jobs: [a, b, c]
     setup:
       image: node:20
