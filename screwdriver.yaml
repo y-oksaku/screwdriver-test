@@ -15,8 +15,8 @@ jobs:
       - wait: sleep 30
   b:
     requires: []
-    steps:
-      - fail: exit 1
+    # steps:
+    #   - fail: exit 1
   c:
     requires: [a]
   d:
