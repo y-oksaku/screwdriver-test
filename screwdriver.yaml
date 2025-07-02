@@ -1,5 +1,5 @@
-# annotations:
-#   screwdriver.cd/chainPR: true
+annotations:
+  screwdriver.cd/chainPR: true
 
 shared:
   image: node:20
