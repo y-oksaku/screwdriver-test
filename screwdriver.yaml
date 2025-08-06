@@ -25,6 +25,8 @@ jobs:
     requires: [ stage@simple:setup ]
   f:
     requires: [ stage@simple ]
+    annotations:
+      screwdriver.cd/virtualJob: true
 
 stages:
   simple:
