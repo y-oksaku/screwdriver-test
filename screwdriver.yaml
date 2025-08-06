@@ -32,11 +32,11 @@ stages:
   simple:
     requires: [ ~pr, ~commit ]
     jobs: [a, b, c]
-    setup:
-      image: node:20
-      steps:
-        - init: echo 'integration setup'
-    teardown:
-      image: node:20
-      steps:
-        - init: echo 'integration teardown'
+    # setup:
+    #   image: node:20
+    #   steps:
+    #     - init: echo 'integration setup'
+    # teardown:
+    #   image: node:20
+    #   steps:
+    #     - init: echo 'integration teardown'
