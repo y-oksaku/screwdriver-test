@@ -1,42 +1,20 @@
-annotations:
-  screwdriver.cd/chainPR: false
-
 shared:
-  image: node:20
-  steps:
-    - hello: echo 'world!'
+    image: node:20
 
 jobs:
-  main:
-    requires: [ ~pr ]
-  a:
-    requires: []
-    steps:
-      - wait: sleep 30
-  b:
-    requires: []
-    # steps:
-    #   - fail: exit 1
-  c:
-    requires: [a]
-  d:
-    requires: [ main ]
-  e:
-    requires: [ stage@simple:setup ]
-  f:
-    requires: [ stage@simple ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-
-stages:
-  simple:
-    requires: [ ~pr, ~commit ]
-    jobs: [a, b, c]
-    # setup:
-    #   image: node:20
-    #   steps:
-    #     - init: echo 'integration setup'
-    # teardown:
-    #   image: node:20
-    #   steps:
-    #     - init: echo 'integration teardown'
+    main:
+        requires: [ ~pr, ~commit, ~pr-closed ]
+        steps:
+            - meta: meta set foo bar
+        parameters:
+          foo: bar
+    three:
+        requires: [ sd@25614:two ]
+        steps:
+            - meta: echo 'foo'
+        annotations:
+          screwdriver.cd/virtualJob: true
+    four:
+        requires: [ three ]
+        steps:
+            - meta: echo 'foo'
