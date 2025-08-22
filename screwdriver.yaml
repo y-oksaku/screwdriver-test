@@ -5,11 +5,11 @@ jobs:
     annotations:
       screwdriver.cd/virtualJob: true
     steps:
-      - test: meta dump
+      - test: meta dump | jq -M
   two:
     requires: [ one ]
     image: node:20
     annotations:
       screwdriver.cd/virtualJob: true
     steps:
-      - test: meta dump
+      - test: meta dump | jq -M
