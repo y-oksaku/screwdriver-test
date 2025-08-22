@@ -1,13 +1,15 @@
-shared:
-    image: node:14
-    steps:
-        - test: echo 'foo'
 jobs:
-  foo:
-    requires: [ ~sd@9550:main ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  bar:
-    requires: [ sd@9550:main ]
-    annotations:
-      screwdriver.cd/virtualJob: true
+  one:
+    requires: [ sd@20898:main ]
+    image: node:20
+    # annotations:
+    #   screwdriver.cd/virtualJob: true
+    steps:
+      - test: meta dump
+  two:
+    requires: [ one ]
+    image: node:20
+    # annotations:
+    #   screwdriver.cd/virtualJob: true
+    steps:
+      - test: meta dump
