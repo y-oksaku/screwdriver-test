@@ -2,14 +2,14 @@ jobs:
   one:
     requires: [ sd@20898:main ]
     image: node:20
-    # annotations:
-    #   screwdriver.cd/virtualJob: true
+    annotations:
+      screwdriver.cd/virtualJob: true
     steps:
       - test: meta dump
   two:
     requires: [ one ]
     image: node:20
-    # annotations:
-    #   screwdriver.cd/virtualJob: true
+    annotations:
+      screwdriver.cd/virtualJob: true
     steps:
       - test: meta dump
