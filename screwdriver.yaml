@@ -17,4 +17,4 @@ jobs:
     four:
         requires: [ three ]
         steps:
-            - meta: echo 'foo'
+            - test: meta dump | jq -M
