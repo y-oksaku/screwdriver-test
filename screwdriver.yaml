@@ -22,5 +22,4 @@ jobs:
 stages:
   new:
     jobs: [ main ]
-    requires: [ ~commit, ~pr ]
     description: "PR description"
