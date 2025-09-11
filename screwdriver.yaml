@@ -9,7 +9,6 @@ jobs:
         parameters:
           foo: bar
     three:
-        requires: [ sd@25614:two ]
         steps:
             - meta: echo 'foo'
         annotations:
@@ -22,4 +21,8 @@ jobs:
 stages:
   new:
     jobs: [ main ]
+    description: "PR description"
+  new2:
+    jobs: [ three ]
+    requires: [ ~pr ]
     description: "PR description"
