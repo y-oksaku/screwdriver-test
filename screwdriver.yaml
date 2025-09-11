@@ -3,7 +3,7 @@ shared:
 
 jobs:
     main:
-        requires: [ ~pr, ~commit, ~pr-closed ]
+        # requires: [ ~pr, ~commit, ~pr-closed ]
         steps:
             - meta: meta set foo bar
         parameters:
@@ -18,3 +18,9 @@ jobs:
         requires: [ three ]
         steps:
             - test: meta dump | jq -M
+
+stages:
+  new:
+    jobs: [ main ]
+    requires: [ ~commit, ~pr ]
+    description: "PR description"
