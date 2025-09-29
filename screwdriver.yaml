@@ -9,7 +9,7 @@ jobs:
         parameters:
           foo: bar
     three:
-        requires: [ sd@25614:two ]
+        requires: [ ~commit, sd@25614:two ]
         steps:
             - meta: echo 'foo'
         annotations:
