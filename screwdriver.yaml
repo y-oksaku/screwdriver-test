@@ -16,16 +16,22 @@ jobs:
           screwdriver.cd/virtualJob: true
         settings:
           slack:
-            channels: [ test-default-notification ]
-            statuses: [ SUCCESS ]
+            channels:
+              - test-default-notification
+            statuses:
+              - SUCCESS
+            message: "Hello! Screwdriver.cd!"
     four:
         requires: [ three ]
         steps:
             - test: meta dump | jq -M
         settings:
           slack:
-            channels: [ test-default-notification ]
-            statuses: [ SUCCESS ]
+            channels:
+              - test-default-notification
+            statuses:
+              - SUCCESS
+            message: "Hello! Screwdriver.cd!"
 stages:
   new:
     jobs: [ main ]
