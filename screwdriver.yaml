@@ -22,7 +22,10 @@ jobs:
         requires: [ three ]
         steps:
             - test: meta dump | jq -M
-
+        settings:
+          slack:
+            channels: [ test-default-notification ]
+            statuses: [ SUCCESS ]
 stages:
   new:
     jobs: [ main ]
