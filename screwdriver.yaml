@@ -1,44 +1,10 @@
 shared:
-  image: node:18
+  image: node:20
   steps:
-    - test: echo 'tt'
-jobs:
-  hub:
-    requires: [ ~commit ]
-  hub-single-join:
-    requires: [ hub ]
-  hub-same-time-multi-join:
-    requires: [ hub ]
-  hub-diff-time-multi-join:
-    requires: [ hub ]
-  hub-single-trigger:
-    requires: [ hub ]
-  hub-same-time-multi-trigger:
-    requires: [ hub ]
-  hub-diff-time-multi-trigger:
-    requires: [ hub ]
-  hub-same-time-mix:
-    requires: [ hub ]
-  hub-diff-time-mix:
-    requires: [ hub ]
-  foo:
-    requires: []
+    - test: echo 'test'
 
-  single-join:
-    requires: [ sd@12501:single-join-sub, foo ]
-  plane-single-join:
-    requires: sd@12501:single-join-sub
-  same-time-multi-join:
-    requires: [ sd@12501:same-time-multi-join-sub1, sd@12501:same-time-multi-join-sub2 ]
-  diff-time-multi-join:
-    requires: [ sd@12501:diff-time-multi-join-sub1, sd@12501:diff-time-multi-join-sub2 ]
-  single-trigger:
-    requires: [ ~sd@12501:single-trigger-sub, foo ]
-  same-time-multi-trigger:
-    requires: [ ~sd@12501:same-time-multi-trigger-sub1, ~sd@12501:same-time-multi-trigger-sub2 ]
-  diff-time-multi-trigger:
-    requires: [ ~sd@12501:diff-time-multi-trigger-sub1, ~sd@12501:diff-time-multi-trigger-sub2 ]
-  same-time-mix:
-    requires: [ ~sd@12501:same-time-mix-sub, sd@12501:same-time-mix-sub1, sd@12501:same-time-mix-sub2 ]
-  diff-time-mix:
-    requires: [ ~sd@12501:diff-time-mix-sub, sd@12501:diff-time-mix-sub1, sd@12501:diff-time-mix-sub2 ]
+jobs:
+  up_a:
+    requires: [ ~commit ]
+  up_b:
+    requires: [ sd@12501:down_a, sd@12501:down_b ]
