@@ -1,41 +1,12 @@
-annotations:
-  screwdriver.cd/chainPR: true
-
 shared:
-    image: node:20
+  image: node:20
+  steps:
+    - test: echo 'test'
 
 jobs:
-    main:
-        # requires: [ ~pr, ~commit, ~pr-closed ]
-        steps:
-            - meta: meta set foo bar
-        parameters:
-          foo: bar
-    three:
-        requires: [ ~commit, sd@25614:two ]
-        steps:
-            - meta: echo 'foo'
-        annotations:
-          screwdriver.cd/virtualJob: true
-        settings:
-          slack:
-            channels:
-              - test-default-notification
-            statuses:
-              - SUCCESS
-            message: "Hello! Screwdriver.cd!"
-    four:
-        requires: [ three ]
-        steps:
-            - test: meta dump | jq -M
-        settings:
-          slack:
-            channels:
-              - test-default-notification
-            statuses:
-              - SUCCESS
-            message: "Hello! Screwdriver.cd!"
-stages:
-  new:
-    jobs: [ main ]
-    description: "PR description"
+  foo:
+    requires: [ ~pr-closed ]  # Working
+  bar:
+    requires: [ ~pr-closed:main ] # Not working when the "main" branch is pipeline base
+  baz:
+    requires: [ ~pr-closed:/main|develop/ ] # Not working when the PR base branch is "main"
