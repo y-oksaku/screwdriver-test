@@ -1,7 +1,9 @@
 shared:
   image: node:20
   steps:
-    - test: meta dump | jq -M
+    - test: |
+        meta dump | jq -M
+        meta get parameters.up.value --skip-fetch --external sd@12500:up_a
 
 jobs:
   down_a:
