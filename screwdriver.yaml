@@ -6,5 +6,7 @@ shared:
 jobs:
   up_a:
     requires: [ ~commit ]
+    parameters:
+      up: "test"
   up_b:
     requires: [ sd@12501:down_a, sd@12501:down_b ]
