@@ -1,12 +1,8 @@
 shared:
-  image: node:20
+  # image: node:20
   steps:
     - test: echo 'test'
 
 jobs:
   foo:
-    requires: [ ~pr-closed ]  # Working
-  bar:
-    requires: [ ~pr-closed:main ] # Not working when the "main" branch is pipeline base
-  baz:
-    requires: [ ~pr-closed:/main|develop/ ] # Not working when the PR base branch is "main"
+    requires: [ ~commit ]  # Working
