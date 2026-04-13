@@ -13,7 +13,7 @@ jobs:
     annotations:
       screwdriver.cd/virtualJob: true
   b:
-    requires: [ ~b ]
+    requires: [ ~a ]
     annotations:
       screwdriver.cd/virtualJob: true
   hub2:
