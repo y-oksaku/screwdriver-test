@@ -4,5 +4,25 @@ shared:
     - test: echo 'test'
 
 jobs:
-  foo:
-    requires: [ ~commit ]  # Working
+  hub1:
+    requires: [ ~commit, ~pr ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  a:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  b:
+    requires: [ ~b ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  hub2:
+    requires: [ ~commit, ~pr ]
+  c:
+    requires: [ ~hub2 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  d:
+    requires: [ ~c ]
+    annotations:
+      screwdriver.cd/virtualJob: true
