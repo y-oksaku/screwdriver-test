@@ -26,3 +26,47 @@ jobs:
     requires: [ ~c ]
     annotations:
       screwdriver.cd/virtualJob: true
+  sub1:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub2:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub3:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub4:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub5:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub6:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub7:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub8:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub9:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub10:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
+  sub11:
+    requires: [ ~hub1 ]
+    annotations:
+      screwdriver.cd/virtualJob: true
