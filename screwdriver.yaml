@@ -1,72 +1,21 @@
+annotations:
+  screwdriver.cd/chainPR: true
 shared:
   image: node:20
-  steps:
-    - test: echo 'test'
-
 jobs:
-  hub1:
+  main:
     requires: [ ~commit, ~pr ]
-    annotations:
-      screwdriver.cd/virtualJob: true
+    steps:
+      - test: echo 'test'
   a:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
+    requires: [ ~main ]
+    steps:
+      - test: echo 'test'
   b:
-    requires: [ ~a ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  hub2:
-    requires: [ ~commit, ~pr ]
+    requires: [ ~main ]
+    steps:
+      - test: meta dump
   c:
-    requires: [ ~hub2 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  d:
-    requires: [ ~c ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub1:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub2:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub3:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub4:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub5:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub6:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub7:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub8:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub9:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub10:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
-  sub11:
-    requires: [ ~hub1 ]
-    annotations:
-      screwdriver.cd/virtualJob: true
+    requires: [ a, b ]
+    steps:
+      - test: meta set foo 'bar'
