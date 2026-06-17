@@ -13,3 +13,7 @@ jobs:
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
+  add:
+    requires: [ ~commit, ~pr ]
+    steps:
+      - test: echo 'test'
