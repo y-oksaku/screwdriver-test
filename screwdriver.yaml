@@ -1,21 +1,15 @@
-annotations:
-  screwdriver.cd/chainPR: true
+# annotations:
+#   screwdriver.cd/chainPR: true
 shared:
   image: node:20
 jobs:
   main:
+    annotations:
+      screwdriver.cd/manualStartEnabled: false
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
-  a:
-    requires: [ ~main ]
+  sub:
+    requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
-  b:
-    requires: [ ~main ]
-    steps:
-      - test: meta dump
-  c:
-    requires: [ a, b ]
-    steps:
-      - test: meta set foo 'bar'
