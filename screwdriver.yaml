@@ -7,7 +7,3 @@ jobs:
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
-  b:
-    requires: [ ~commit, ~pr ]
-    steps:
-      - test: echo 'test'
