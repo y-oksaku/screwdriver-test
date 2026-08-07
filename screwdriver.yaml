@@ -3,13 +3,11 @@
 shared:
   image: node:20
 jobs:
-  main:
-    annotations:
-      screwdriver.cd/manualStartEnabled: false
+  a:
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
-  sub:
+  b:
     requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
