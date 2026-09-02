@@ -4,6 +4,16 @@ shared:
   image: node:20
 jobs:
   a:
-    requires: [ ~commit, ~pr ]
     steps:
       - test: echo 'test'
+  b:
+    requires: [ stage@test ]
+    steps:
+      - test: echo 'test'
+
+stages:
+  test:
+    jobs: [ a ]
+    requires: [ ~commit ]
+    annotations:
+      screwdriver.cd/manualStartEnabled: false
