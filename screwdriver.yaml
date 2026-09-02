@@ -15,5 +15,5 @@ stages:
   test:
     jobs: [ a ]
     requires: [ ~commit ]
-    # annotations:
-    #   screwdriver.cd/manualStartEnabled: false
+    annotations:
+      screwdriver.cd/manualStartEnabled: false
