@@ -3,17 +3,26 @@
 shared:
   image: node:20
 jobs:
-  a:
+  a-test1:
     steps:
       - test: echo 'test'
-  b:
-    requires: [ stage@test ]
+  a-test2:
+    steps:
+      - test: echo 'test'
+  b-test:
+    requires: [ stage@test-a ]
+    steps:
+      - test: echo 'test'
+  c-test:
     steps:
       - test: echo 'test'
 
 stages:
-  test:
-    jobs: [ a ]
+  test-a:
+    jobs: [ a-test1, a-test2 ]
     requires: [ ~commit ]
     annotations:
       screwdriver.cd/manualStartEnabled: false
+  test-c:
+    jobs: [ c-test ]
+    requires: [ ~commit ]
